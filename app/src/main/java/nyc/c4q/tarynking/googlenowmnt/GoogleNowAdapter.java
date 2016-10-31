@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by tarynking on 10/30/16.
- */
 
 public class GoogleNowAdapter extends RecyclerView.Adapter<GoogleNowAdapter.CardHolder> {
     private LayoutInflater mInflater;
