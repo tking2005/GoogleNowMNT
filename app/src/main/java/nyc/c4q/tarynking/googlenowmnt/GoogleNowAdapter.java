@@ -43,13 +43,13 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context cntx = parent.getContext();
+
+        //View itemView = LayoutInflater.from(context).inflater(R.layout.item_watch_movie,parent,false)
+        // we need use get itemViewType
+
+
         LayoutInflater inflater =LayoutInflater.from(context);
         View weatherView =inflater.inflate(R.layout.weather_item, parent, false);
         CardViewHolder cvh = new CardViewHolder(weatherView);
@@ -82,5 +82,10 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
 
     public Context getContext() {
         return context;
+    }
+
+    @Override
+    public int getItemCount() {
+        return this.myItemList.size();
     }
 }
