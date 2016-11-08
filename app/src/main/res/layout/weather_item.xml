@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:id="@+id/outer_containerLL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="#f0f0f5">
+        <LinearLayout
+            android:id="@+id/text_containerLL"
+            android:layout_width="0dp"
+            android:layout_weight ="75"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:background="#ffffff">
+            <LinearLayout
+                android:id="@+id/first_row_textLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/temperatureTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    tools:text="56" />
+
+                <TextView
+                    android:id="@+id/inTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="8"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="in " />
+                <TextView
+                    android:id="@+id/locationTV"
+                    android:layout_width="0dp"
+                    android:layout_weight="40"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    tools:text="New York" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/descriptionTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:paddingLeft="5dp"
+                tools:text="Partly cloudy"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iconIV"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/part_cloudy"/>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
