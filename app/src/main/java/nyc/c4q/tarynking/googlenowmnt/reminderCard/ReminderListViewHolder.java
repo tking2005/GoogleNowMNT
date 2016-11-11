@@ -16,13 +16,11 @@ import nyc.c4q.tarynking.googlenowmnt.R;
 public class ReminderListViewHolder extends RecyclerView.ViewHolder {
     private final View mView;
     private TextView reminderView;
-    private Button addButton;
 
     public ReminderListViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;
         reminderView = (TextView) mView.findViewById(R.id.reminder_textView);
-        addButton = (Button) mView.findViewById(R.id.reminder_add_new);
     }
 
     private static View inflateView(ViewGroup parent) {
