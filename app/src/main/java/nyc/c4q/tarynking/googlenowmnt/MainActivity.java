@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 
 import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
-import nyc.c4q.tarynking.googlenowmnt.networks.weather.WeatherClient;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
 import retrofit2.Call;
 import retrofit2.Callback;
