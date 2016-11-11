@@ -23,7 +23,6 @@ public class ReminderListViewHolder extends RecyclerView.ViewHolder {
         mView = itemView;
         reminderView = (TextView) mView.findViewById(R.id.reminder_textView);
         addButton = (Button) mView.findViewById(R.id.reminder_add_new);
-
     }
 
     private static View inflateView(ViewGroup parent) {
