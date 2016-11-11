@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.squareup.picasso.Picasso;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import nyc.c4q.tarynking.googlenowmnt.Model.WeatherModel;
@@ -25,25 +29,31 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
-        TextView tempTextV, locationTextV, descriptionTextV;
+        TextView tempTextV, locationTextV, descriptionTextV, hummidityTextTV, pressureTextTv;
         ImageView iconImageV;
+        View view;
 
 
         public CardViewHolder(View itemView) {
             super(itemView);
-
+            view=itemView;
             tempTextV = (TextView) itemView.findViewById(R.id.temperatureTV);
             locationTextV = (TextView) itemView.findViewById(R.id.locationTV);
             descriptionTextV = (TextView)itemView.findViewById(R.id.descriptionTV);
             iconImageV = (ImageView)itemView.findViewById(R.id.iconIV);
+            hummidityTextTV = (TextView) itemView.findViewById(R.id.hummudityTV);
+            pressureTextTv = (TextView) itemView.findViewById(R.id.pressureTV);
             cardView=(CardView)itemView.findViewById(R.id.weatherCV);
         }
 
         public void bind(Object o) {
             WeatherModel model = (WeatherModel) o;
-            tempTextV.setText(String.valueOf(model.getMain().getTemp()));
+            tempTextV.setText(String.valueOf(model.getMain().getTemp()) +" F");
             locationTextV.setText(model.getName());
             descriptionTextV.setText(model.getWeather().get(0).getDescription());
+            hummidityTextTV.setText("Humm: "+ String.valueOf(model.getMain().getHumidity())+"%");
+            pressureTextTv.setText("Press: "+String.valueOf(model.getMain().getPressure()));
+            Picasso.with(view.getContext()).load("http://openweathermap.org/img/w/"+ model.getWeather().get(0).getIcon()+".png").resize(180,180).centerCrop().into(iconImageV);
 
         }
     }
@@ -63,22 +73,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
         holder.bind(myItemList.get(position));
 
 
-
-
-//        TextView temperature = holder.tempTextV ;
-//        temperature.setText((int) item.getWeatherCard().getMain().getTemp());
-//
-//        TextView location  = holder.locationTextV;
-//        location.setText(item.getWeatherCard().getName());
-//
-//        TextView description = holder.descriptionTextV;
-//        description.setText(item.getWeatherCard().getWeather().get;
-//
-//        ImageView images = holder.iconImageV;
-//        images.setImageResource(R.drawable.part_cloudy);
-
     }
-
     //constructor
     public GoogleNowAdapter(List<Object> myItemList, Context context) {
         this.context = context;
@@ -92,5 +87,17 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
     @Override
     public int getItemCount() {
         return myItemList.size();
+    }
+
+    public void getWeatherPicture(String icon) throws MalformedURLException {
+
+        URL imageURL= new URL("http://openweathermap.org/img/w/");
+
+        try {
+            InputStream content=(InputStream)imageURL.getContent();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -9,6 +9,8 @@ public class Weather {
     String main;
     String description;
     String icon;
+    int hummidty;
+    int pressure;
 
     public String getDescription() {
         return description;
@@ -24,5 +26,13 @@ public class Weather {
 
     public String getMain() {
         return main;
+    }
+
+    public int getHummidty() {
+        return hummidty;
+    }
+
+    public int getPressure() {
+        return pressure;
     }
 }

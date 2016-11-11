@@ -20,7 +20,7 @@ public class Main {
     }
 
     public double getTemp() {
-        return temp;
+        return (int) (1.8 * (temp -273.0) +32.0);
     }
 
     public double getTempMax() {
