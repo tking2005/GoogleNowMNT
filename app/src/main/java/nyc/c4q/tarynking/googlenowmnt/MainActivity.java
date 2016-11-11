@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
 import nyc.c4q.tarynking.googlenowmnt.weatherCard.Weather;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,13 +20,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rv);
-        carditems = new ArrayList<>();
-        carditems.add(new CardsItem( new Weather("Description", 0, "NewYork", "56")));
-        GoogleNowAdapter gnadapter = new GoogleNowAdapter(carditems, this);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GoogleNowAdapter gnadapter = new GoogleNowAdapter();
         recyclerView.setAdapter(gnadapter);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
+        Weather weather = new Weather("Description", 0, "NewYork", "56");
+        gnadapter.addToMyItemList(weather);
+
+        //Do for reminder
+
+        Reminder reminder1 = new Reminder("do Homework");
+        gnadapter.addToMyItemList(reminder1);
     }
 }

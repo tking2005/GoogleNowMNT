@@ -1,88 +1,118 @@
 package nyc.c4q.tarynking.googlenowmnt;
 
-import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
+import nyc.c4q.tarynking.googlenowmnt.viewholders.ReminderViewHolder;
+import nyc.c4q.tarynking.googlenowmnt.viewholders.WeatherViewHolder;
+import nyc.c4q.tarynking.googlenowmnt.weatherCard.Weather;
 
 /**
  * Created by tarynking on 10/30/16.
  */
 
-public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.CardViewHolder>{
+public class GoogleNowAdapter extends RecyclerView.Adapter{
 
-    private ArrayList<CardsItem>  myItemList ;
-    private Context context ;
+    //3. change cardsItem to object
+    private List<Object> myItemList = new ArrayList<Object>();
 
+    //1. Add Final Variables
+    private final int WEATHER = 0, REMINDER = 1;
 
-
-
-    public static class CardViewHolder extends RecyclerView.ViewHolder{
-        CardView cardView;
-        TextView tempTextV, locationTextV, descriptionTextV;
-        ImageView iconImageV;
-
-
-        public CardViewHolder(View itemView) {
-            super(itemView);
-
-            tempTextV = (TextView) itemView.findViewById(R.id.temperatureTV);
-            locationTextV = (TextView) itemView.findViewById(R.id.locationTV);
-            descriptionTextV = (TextView)itemView.findViewById(R.id.descriptionTV);
-            iconImageV = (ImageView)itemView.findViewById(R.id.iconIV);
-            cardView=(CardView)itemView.findViewById(R.id.weatherCV);
-
-
-        }
+    //2. Add this method
+    public int getItemViewType(int position) {
+        if (myItemList.get(position) instanceof Weather) {
+            System.out.println("getItemViewType: weather");
+            return WEATHER;
+        } else if (myItemList.get(position) instanceof Reminder) {
+            System.out.println("getItemViewType: reminder");
+            return REMINDER;
+        } //2. getItemViewType() returns constant number depending on the type of object in the dataList
+        //   then feeds it to onCreateViewHolder() to inflate a viewholder depending on that constant number
+        //   - essentially allows different view holders for the same adapter (in our case, different cards)
+        //   Add another else if for your card,
+        //   example: else if (dataList.(position) instanceof <name_of_your_POJO>)
+        //            return <your_card_constant_in_the_field>
+        return -1;
     }
 
+    //4. MAke WeatherViewHolder and delete this
+//    public static class CardViewHolder extends RecyclerView.ViewHolder{
+//        CardView cardView;
+//        TextView tempTextV, locationTextV, descriptionTextV;
+//        ImageView iconImageV;
+//
+//
+//        public CardViewHolder(View itemView) {
+//            super(itemView);
+//
+//            tempTextV = (TextView) itemView.findViewById(R.id.temperatureTV);
+//            locationTextV = (TextView) itemView.findViewById(R.id.locationTV);
+//            descriptionTextV = (TextView)itemView.findViewById(R.id.descriptionTV);
+//            iconImageV = (ImageView)itemView.findViewById(R.id.iconIV);
+//            cardView=(CardView)itemView.findViewById(R.id.weatherCV);
+//
+//
+//        }
+//    }
+
+
     @Override
-    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context cntx = parent.getContext();
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)  {
 
         //View itemView = LayoutInflater.from(context).inflater(R.layout.item_watch_movie,parent,false)
         // we need use get itemViewType
 
+        RecyclerView.ViewHolder viewHolder;
 
-        LayoutInflater inflater =LayoutInflater.from(context);
-        View weatherView =inflater.inflate(R.layout.weather_item, parent, false);
-        CardViewHolder cvh = new CardViewHolder(weatherView);
-        return cvh;
+        switch(viewType) {
+            case WEATHER:
+                System.out.println("Inflating viewHolder: weather");
+                viewHolder = new WeatherViewHolder(parent);
+                break;
+            case REMINDER:
+                System.out.println("Inflating viewHolder: reminder");
+                viewHolder = new ReminderViewHolder(parent);
+                break;
+            //3. Inflating your personalized view holder...
+            //   Add a case for <your_card_constant>
+            //   set viewHolder = new custom <your_view_holder_class> that you'll make
+
+            default:
+                System.out.println("Inflating viewHolder: default");
+                viewHolder = new WeatherViewHolder(parent);
+        }
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder holder, int position) {
-       CardsItem item = myItemList.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case WEATHER:
+                WeatherViewHolder weatherViewHolder = (WeatherViewHolder) holder;
+                weatherViewHolder.bind(myItemList.get(position));
+                break;
+            case REMINDER:
+                ReminderViewHolder reminderViewHolder = (ReminderViewHolder) holder;
+                reminderViewHolder.bind(myItemList.get(position));
+                break;
+            //4. Data that is in dataList.get(position) is the data you sent from MainActivity
+            //   You'll then send this data to your view holder class here
+            //   Add a case for <your_card_constant>
+            //   call the bind() method in your view holder class that will stylize your data with the your card layout
 
-        TextView temperature = holder.tempTextV ;
-        temperature.setText(item.getWeatherCard().getTemp());
-
-        TextView location  = holder.locationTextV;
-        location.setText(item.getWeatherCard().getLocation());
-
-        TextView description = holder.descriptionTextV;
-        description.setText(item.getWeatherCard().getLocation());
-
-        ImageView images = holder.iconImageV;
-        images.setImageResource(R.drawable.part_cloudy);
-
+        }
     }
 
-    //constructor
-    public GoogleNowAdapter(ArrayList<CardsItem> myItemList, Context context) {
-        this.context = context;
-        this.myItemList = myItemList;
+    public void addToMyItemList(Object item) {
+        myItemList.add(item);
+        notifyDataSetChanged();
     }
 
-    public Context getContext() {
-        return context;
-    }
 
     @Override
     public int getItemCount() {
