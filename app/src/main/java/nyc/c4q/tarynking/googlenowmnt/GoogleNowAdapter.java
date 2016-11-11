@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import nyc.c4q.tarynking.googlenowmnt.Model.WeatherModel;
 
 /**
  * Created by tarynking on 10/30/16.
@@ -17,10 +19,8 @@ import java.util.ArrayList;
 
 public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.CardViewHolder>{
 
-    private ArrayList<CardsItem>  myItemList ;
+    private List<Object> myItemList;
     private Context context ;
-
-
 
 
     public static class CardViewHolder extends RecyclerView.ViewHolder{
@@ -37,7 +37,13 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
             descriptionTextV = (TextView)itemView.findViewById(R.id.descriptionTV);
             iconImageV = (ImageView)itemView.findViewById(R.id.iconIV);
             cardView=(CardView)itemView.findViewById(R.id.weatherCV);
+        }
 
+        public void bind(Object o) {
+            WeatherModel model = (WeatherModel) o;
+            tempTextV.setText(String.valueOf(model.getMain().getTemp()));
+            locationTextV.setText(model.getName());
+            descriptionTextV.setText(model.getWeather().get(0).getDescription());
 
         }
     }
@@ -45,10 +51,6 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context cntx = parent.getContext();
-
-        //View itemView = LayoutInflater.from(context).inflater(R.layout.item_watch_movie,parent,false)
-        // we need use get itemViewType
-
 
         LayoutInflater inflater =LayoutInflater.from(context);
         View weatherView =inflater.inflate(R.layout.weather_item, parent, false);
@@ -58,24 +60,27 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-       CardsItem item = myItemList. get(position);
+        holder.bind(myItemList.get(position));
 
-        TextView temperature = holder.tempTextV ;
-        temperature.setText(item.getWeatherCard().getTemp());
 
-        TextView location  = holder.locationTextV;
-        location.setText(item.getWeatherCard().getLocation());
 
-        TextView description = holder.descriptionTextV;
-        description.setText(item.getWeatherCard().getLocation());
 
-        ImageView images = holder.iconImageV;
-        images.setImageResource(R.drawable.part_cloudy);
+//        TextView temperature = holder.tempTextV ;
+//        temperature.setText((int) item.getWeatherCard().getMain().getTemp());
+//
+//        TextView location  = holder.locationTextV;
+//        location.setText(item.getWeatherCard().getName());
+//
+//        TextView description = holder.descriptionTextV;
+//        description.setText(item.getWeatherCard().getWeather().get;
+//
+//        ImageView images = holder.iconImageV;
+//        images.setImageResource(R.drawable.part_cloudy);
 
     }
 
     //constructor
-    public GoogleNowAdapter(ArrayList<CardsItem> myItemList, Context context) {
+    public GoogleNowAdapter(List<Object> myItemList, Context context) {
         this.context = context;
         this.myItemList = myItemList;
     }
@@ -86,6 +91,6 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
 
     @Override
     public int getItemCount() {
-        return this.myItemList.size();
+        return myItemList.size();
     }
 }

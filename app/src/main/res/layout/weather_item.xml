@@ -36,7 +36,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="10"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     tools:text="56" />
 
                 <TextView
@@ -44,14 +44,14 @@
                     android:layout_width="0dp"
                     android:layout_weight="8"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:text="in " />
                 <TextView
                     android:id="@+id/locationTV"
                     android:layout_width="0dp"
                     android:layout_weight="40"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     tools:text="New York" />
             </LinearLayout>
 
