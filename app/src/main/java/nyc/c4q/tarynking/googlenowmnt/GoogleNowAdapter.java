@@ -58,7 +58,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter <GoogleNowAdapter.Car
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-       CardsItem item = myItemList. get(position);
+       CardsItem item = myItemList.get(position);
 
         TextView temperature = holder.tempTextV ;
         temperature.setText(item.getWeatherCard().getTemp());
