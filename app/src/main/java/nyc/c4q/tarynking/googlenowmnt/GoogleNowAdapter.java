@@ -6,10 +6,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
 import nyc.c4q.tarynking.googlenowmnt.viewholders.ReminderViewHolder;
 import nyc.c4q.tarynking.googlenowmnt.viewholders.WeatherViewHolder;
-import nyc.c4q.tarynking.googlenowmnt.weatherCard.Weather;
 
 /**
  * Created by tarynking on 10/30/16.
@@ -25,7 +25,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
 
     //2. Add this method
     public int getItemViewType(int position) {
-        if (myItemList.get(position) instanceof Weather) {
+        if (myItemList.get(position) instanceof WeatherModel) {
             System.out.println("getItemViewType: weather");
             return WEATHER;
         } else if (myItemList.get(position) instanceof Reminder) {
