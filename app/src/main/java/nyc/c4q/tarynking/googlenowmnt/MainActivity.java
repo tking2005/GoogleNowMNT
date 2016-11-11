@@ -7,25 +7,52 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import nyc.c4q.tarynking.googlenowmnt.weatherCard.Weather;
+import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
+import nyc.c4q.tarynking.googlenowmnt.networks.weather.WeatherClient;
+import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<CardsItem> carditems;
-
+    private RecyclerView recyclerView;
+    private GoogleNowAdapter gnadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rv);
-        carditems = new ArrayList<>();
-        carditems.add(new CardsItem( new Weather("Description", 0, "NewYork", "56")));
-        GoogleNowAdapter gnadapter = new GoogleNowAdapter(carditems, this);
+        recyclerView = (RecyclerView)findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        gnadapter = new GoogleNowAdapter();
         recyclerView.setAdapter(gnadapter);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
+        //mel's weather card
+        addWeatherCard();
+
+        //Do for reminder
+        Reminder reminder1 = new Reminder("do Homework");
+        gnadapter.addToMyItemList(reminder1);
+
+    }
+
+    public void addWeatherCard() {
+        WeatherClient client = WeatherClient.getInstance();
+        Call<WeatherModel> call = client.fetchWeather("new york");
+        call.enqueue(new Callback<WeatherModel>() {
+            @Override
+            public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
+                if(response.isSuccessful()){
+                    WeatherModel model = response.body();
+                    gnadapter.addToMyItemList(model);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherModel> call, Throwable t) {
+
+            }
+        });
     }
 }

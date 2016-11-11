@@ -1,45 +1,34 @@
 package nyc.c4q.tarynking.googlenowmnt.reminderCard;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-
-import nyc.c4q.tarynking.googlenowmnt.R;
+import java.util.List;
 
 
 /**
  * Created by tarynking on 11/9/16.
  */
 
-public class ReminderAdapter extends RecyclerView.Adapter<ReminderViewHolder>{
+public class ReminderAdapter extends RecyclerView.Adapter<ReminderListViewHolder>{
 
-    ArrayList<Reminder> myReminderList;
-
-
-
-    public ReminderAdapter(ArrayList<Reminder> myReminderList) {
-
-        this.myReminderList = myReminderList;
-    }
-
-
+    private List<Reminder> myReminderList = new ArrayList<Reminder>();
 
     @Override
-    public ReminderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View childView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.reminder_layout,parent,false);
-        return new ReminderViewHolder(childView);
+    public ReminderListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ReminderListViewHolder(parent);
     }
 
     @Override
-    public void onBindViewHolder(ReminderViewHolder holder, int position) {
-
+    public void onBindViewHolder(ReminderListViewHolder holder, int position) {
         Reminder reminder = myReminderList.get(position);
-        holder.reminderView.setText(reminder.getReminderText());
+        holder.bind(reminder);
+    }
 
+    public void updateDataList(Reminder reminder) {
+        myReminderList.add(reminder);
+        notifyDataSetChanged();
     }
 
     @Override
