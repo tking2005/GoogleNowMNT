@@ -20,15 +20,16 @@ public class GoogleNowAdapter extends RecyclerView.Adapter<GoogleNowAdapter.Card
     @Override
     public CardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mInflater.inflate(R.layout.test_card_view2,parent,false);
+        View view = mInflater.inflate(R.layout.test_card_view2, parent, false);
         CardHolder holder = new CardHolder(view);
         return holder;
+
     }
 
     @Override
     public void onBindViewHolder(CardHolder holder, int position) {
 
-        Log.d("Yes", ""+position);
+        Log.d("Yes", "" + position);
     }
 
     @Override

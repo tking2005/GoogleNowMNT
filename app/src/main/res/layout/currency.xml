@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="15dp"
+        >
+
+
+        <LinearLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="#339dc0"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 USD :"
+                android:textSize="15dp"
+                android:textStyle="italic"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="EURO"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_euro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:textColor="#ffe268"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="CAD"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_cad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:textColor="#ffe268"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="AUD"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_aud"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:textColor="#ffe268"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="GBP"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_gbp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:textColor="#ffe268"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="CHF"
+                    android:textSize="15dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_chf"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="15dp"
+                    android:textColor="#ffe268"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+            <Button
+                android:id="@+id/btn_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REFRESH"
+                android:textSize="9dp"
+                android:layout_gravity="right"
+
+
+                />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
