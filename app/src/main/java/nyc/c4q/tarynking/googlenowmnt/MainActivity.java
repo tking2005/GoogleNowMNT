@@ -1,12 +1,14 @@
 package nyc.c4q.tarynking.googlenowmnt;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
-
+import nyc.c4q.tarynking.googlenowmnt.Cards.Card1;
 import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
 import nyc.c4q.tarynking.googlenowmnt.networks.weather.WeatherClient;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        permission();
+        Card1.refresh();
 
         recyclerView = (RecyclerView)findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,4 +60,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void permission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},   //request specific permission from user
+                    10);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.INTERNET},   //request specific permission from user
+                    10);
+
+            return;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
 }

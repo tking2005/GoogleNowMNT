@@ -1,7 +1,12 @@
 package nyc.c4q.tarynking.googlenowmnt;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,4 +123,18 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
     public int getItemCount() {
         return this.myItemList.size();
     }
+
+    //this class is going to keep one drop in a current moment
+    public static class CardHolder extends RecyclerView.ViewHolder {
+        TextView mWhat;
+
+        //class constractor
+        public CardHolder(View itemView) {
+            super(itemView);
+
+        }
+
+
+    }
+
 }
