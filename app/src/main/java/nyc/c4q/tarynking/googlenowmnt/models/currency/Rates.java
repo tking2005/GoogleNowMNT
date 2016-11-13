@@ -1,5 +1,5 @@
 
-package models;
+package nyc.c4q.tarynking.googlenowmnt.models.currency;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

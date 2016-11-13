@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Currency;
+import nyc.c4q.tarynking.googlenowmnt.models.currency.Currency;
 import nyc.c4q.tarynking.googlenowmnt.Cards.CurrencyHolder;
 import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
@@ -86,9 +86,6 @@ public class GoogleNowAdapter extends RecyclerView.Adapter {
                 System.out.println("Inflating viewHolder: reminder");
                 viewHolder = new ReminderViewHolder(parent);
                 break;
-            //3. Inflating your personalized view holder...
-            //   Add a case for <your_card_constant>
-            //   set viewHolder = new custom <your_view_holder_class> that you'll make
             case CURRENCY:
                 System.out.println("Inflating viewHolder: currency");
                 viewHolder = new CurrencyHolder(parent);
@@ -111,6 +108,10 @@ public class GoogleNowAdapter extends RecyclerView.Adapter {
                 ReminderViewHolder reminderViewHolder = (ReminderViewHolder) holder;
                 reminderViewHolder.bind(myItemList.get(position));
                 break;
+            case CURRENCY:
+                CurrencyHolder currencyHolder = (CurrencyHolder) holder;
+                currencyHolder.bind(myItemList.get(position));
+                break;
 
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here
@@ -129,7 +130,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         //return this.myItemList.size();
-        return 3;
+        return myItemList.size();
     }
 
 

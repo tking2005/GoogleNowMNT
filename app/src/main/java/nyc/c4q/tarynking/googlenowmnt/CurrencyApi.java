@@ -1,6 +1,6 @@
 package nyc.c4q.tarynking.googlenowmnt;
 
-import models.Currency;
+import nyc.c4q.tarynking.googlenowmnt.models.currency.Currency;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

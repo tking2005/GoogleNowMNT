@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import nyc.c4q.tarynking.googlenowmnt.models.currency.Currency;
 import nyc.c4q.tarynking.googlenowmnt.CurrencyApi;
 import nyc.c4q.tarynking.googlenowmnt.R;
 import retrofit2.Call;
@@ -50,9 +51,9 @@ public class CurrencyHolder extends RecyclerView.ViewHolder {
     }
 
     public static void refresh() {
-        CurrencyApi.Factory.getInstance().getCurrency().enqueue(new Callback<models.Currency>() {
+        CurrencyApi.Factory.getInstance().getCurrency().enqueue(new Callback<Currency>() {
             @Override
-            public void onResponse(Call<models.Currency> call, Response<models.Currency> response) {
+            public void onResponse(Call<Currency> call, Response<Currency> response) {
 
                 mTvEuro.setText(response.body().getRates().getEUR() + "");
                 mTvCad.setText(response.body().getRates().getCAD() + "");
@@ -62,11 +63,19 @@ public class CurrencyHolder extends RecyclerView.ViewHolder {
             }
 
             @Override
-            public void onFailure(Call<models.Currency> call, Throwable t) {
+            public void onFailure(Call<Currency> call, Throwable t) {
                 Log.e("test", "Failed");
             }
         });
 
     }
 
+    public void bind(Object data) {
+        Currency currency = (Currency) data;
+        mTvEuro.setText(currency.getRates().getEUR() + "");
+        mTvCad.setText(currency.getRates().getCAD() + "");
+        mTvGbp.setText(currency.getRates().getGBP() + "");
+        mTvAud.setText(currency.getRates().getAUD() + "");
+        mTvChf.setText(currency.getRates().getCHF() + "");
+    }
 }

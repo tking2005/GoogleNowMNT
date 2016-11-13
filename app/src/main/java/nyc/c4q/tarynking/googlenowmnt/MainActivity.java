@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import models.Currency;
-import nyc.c4q.tarynking.googlenowmnt.Cards.CurrencyHolder;
-import nyc.c4q.tarynking.googlenowmnt.models.weather.Weather;
+import nyc.c4q.tarynking.googlenowmnt.models.currency.Currency;
 import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
 import nyc.c4q.tarynking.googlenowmnt.networks.weather.WeatherClient;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
@@ -29,15 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
         permission();
 
-
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         gnadapter = new GoogleNowAdapter();
         recyclerView.setAdapter(gnadapter);
 
         //mel's weather card
-        Weather weather1 = new Weather();
-        gnadapter.addToMyItemList(weather1);
+        //Weather weather1 = new Weather(); (Delete this) problem: makes a null WeatherCard
+        //gnadapter.addToMyItemList(weather1); (Delete this)
         addWeatherCard();
 
         //Do for reminder
@@ -45,10 +42,28 @@ public class MainActivity extends AppCompatActivity {
         gnadapter.addToMyItemList(reminder1);
 
         //Nesada's currency card
-        Currency currency1 = new Currency();
-        gnadapter.addToMyItemList(currency1);
+        //Currency currency1 = new Currency(); (Delete this) problem: makes a null currency1
+        //gnadapter.addToMyItemList(currency1); (Delete this)
+        currencyCard();
 
-        CurrencyHolder.refresh();
+        //CurrencyHolder.refresh();
+    }
+
+    private void currencyCard() {
+        CurrencyApi api = CurrencyApi.Factory.getInstance();
+        Call<Currency> call = api.getCurrency();
+        call.enqueue(new Callback<Currency>() {
+            @Override
+            public void onResponse(Call<Currency> call, Response<Currency> response) {
+                Currency currency = response.body();
+                gnadapter.addToMyItemList(currency);
+            }
+
+            @Override
+            public void onFailure(Call<Currency> call, Throwable t) {
+
+            }
+        });
     }
 
     public void addWeatherCard() {
