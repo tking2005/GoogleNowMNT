@@ -1,33 +1,49 @@
 package nyc.c4q.tarynking.googlenowmnt.reminderCard;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
  * Created by tarynking on 11/9/16.
  */
 
-public class ReminderAdapter extends RecyclerView.Adapter<ReminderListViewHolder>{
+public class ReminderAdapter extends RecyclerView.Adapter<ReminderRecyclerViewHolder>{
 
-    private List<Reminder> myReminderList = new ArrayList<Reminder>();
 
-    @Override
-    public ReminderListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ReminderListViewHolder(parent);
+    public  List<Reminder> myReminderList = new ArrayList<Reminder>();
+    private Set<String> myReminderSet = new HashSet<>();
+
+    public ReminderAdapter(List<Reminder> data){
+        this.myReminderList = data;
     }
 
     @Override
-    public void onBindViewHolder(ReminderListViewHolder holder, int position) {
+    public ReminderRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ReminderRecyclerViewHolder(parent);
+    }
+
+    @Override
+    public void onBindViewHolder(ReminderRecyclerViewHolder holder, int position) {
         Reminder reminder = myReminderList.get(position);
         holder.bind(reminder);
     }
 
-    public void updateDataList(Reminder reminder) {
+    public void updateDataList(Context context, Reminder reminder) {
         myReminderList.add(reminder);
+        myReminderSet.add(reminder.getReminderText());
+//        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet("reminders", myReminderSet).apply();
+        notifyDataSetChanged();
+    }
+
+    public void updateList(List<Reminder> data) {
+        myReminderList = data;
         notifyDataSetChanged();
     }
 

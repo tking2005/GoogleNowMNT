@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         addWeatherCard();
 
         //Do for reminder
-        Reminder reminder1 = new Reminder("do Homework");
+        Reminder reminder1 = new Reminder("do laundry");
         gnadapter.addToMyItemList(reminder1);
 
         //Nesada's currency card

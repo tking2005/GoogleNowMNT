@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import nyc.c4q.tarynking.googlenowmnt.R;
@@ -13,11 +12,11 @@ import nyc.c4q.tarynking.googlenowmnt.R;
  * Created by tarynking on 11/9/16.
  */
 
-public class ReminderListViewHolder extends RecyclerView.ViewHolder {
+public class ReminderRecyclerViewHolder extends RecyclerView.ViewHolder {
     private final View mView;
     private TextView reminderView;
 
-    public ReminderListViewHolder(ViewGroup parent) {
+    public ReminderRecyclerViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;
         reminderView = (TextView) mView.findViewById(R.id.reminder_textView);
