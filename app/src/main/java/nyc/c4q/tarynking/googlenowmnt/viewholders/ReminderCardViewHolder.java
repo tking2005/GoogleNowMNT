@@ -15,8 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import nyc.c4q.tarynking.googlenowmnt.MainActivity;
 import nyc.c4q.tarynking.googlenowmnt.R;
-import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.ReminderAdapter;
 
 
@@ -28,14 +28,17 @@ public class ReminderCardViewHolder extends RecyclerView.ViewHolder{
     private Button addButton;
     private EditText reminderEditText;
     private ReminderAdapter adapter;
-    public static List<Reminder> myReminderList = new ArrayList<Reminder>();
-    SharedPreferences.Editor editor;
+    public static List<String> myReminderList = new ArrayList<>();
+    public static SharedPreferences.Editor editor;
 
 
     public ReminderCardViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;
-
+        if(MainActivity.sharedPreferences.getStringSet("reminders", null) != null){
+            myReminderList.addAll(MainActivity.sharedPreferences.getStringSet("reminders",null));
+        }
+        editor = MainActivity.sharedPreferences.edit();
         recyclerView = (RecyclerView) mView.findViewById(R.id.reminder_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(mView.getContext()));
         adapter = new ReminderAdapter(myReminderList);
@@ -60,7 +63,7 @@ public class ReminderCardViewHolder extends RecyclerView.ViewHolder{
                 Toast.makeText(itemView.getContext(), "Added a reminder", Toast.LENGTH_SHORT).show();
                 //TODO: Code to add reminder to reminder adapter
                 if(reminderEditText.getText() != null){
-                    Reminder reminder = new Reminder(String.valueOf(reminderEditText.getText()));
+                    String reminder = String.valueOf(reminderEditText.getText());
                     adapter.updateList(reminder);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(view.getContext(), myReminderList.size()+"", Toast.LENGTH_SHORT).show();

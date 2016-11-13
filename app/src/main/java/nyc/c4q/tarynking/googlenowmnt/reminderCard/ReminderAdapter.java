@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import nyc.c4q.tarynking.googlenowmnt.viewholders.ReminderCardViewHolder;
+
 
 /**
  * Created by tarynking on 11/9/16.
@@ -16,10 +18,10 @@ import java.util.Set;
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderRecyclerViewHolder>{
 
 
-    public  List<Reminder> myReminderList;
+    public  List<String> myReminderList;
     private Set<String> myReminderSet = new HashSet<>();
 
-    public ReminderAdapter(List<Reminder> data){
+    public ReminderAdapter(List<String> data){
         this.myReminderList = data;
     }
 
@@ -30,19 +32,21 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderRecyclerViewHo
 
     @Override
     public void onBindViewHolder(ReminderRecyclerViewHolder holder, int position) {
-        Reminder reminder = myReminderList.get(position);
+        String reminder = myReminderList.get(position);
         holder.bind(reminder);
     }
 
-    public void updateDataList(Context context, Reminder reminder) {
+    public void updateDataList(Context context, String reminder) {
         myReminderList.add(reminder);
-        myReminderSet.add(reminder.getReminderText());
+        myReminderSet.add(reminder);
 //        PreferenceManager.getDefaultSharedPreferences(context).edit().putStringSet("reminders", myReminderSet).apply();
         notifyDataSetChanged();
     }
 
-    public void updateList(Reminder data) {
+    public void updateList(String data) {
         myReminderList.add(data);
+        myReminderSet.add(data);
+        ReminderCardViewHolder.editor.putStringSet("reminders",myReminderSet).apply();
         this.notifyDataSetChanged();
     }
 

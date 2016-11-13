@@ -27,8 +27,8 @@ public class ReminderRecyclerViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.reminder_item_vh, parent, false);
     }
 
-    public void bind(Reminder reminder) {
-        reminderView.setText(reminder.getReminderText());
+    public void bind(String reminder) {
+        reminderView.setText(reminder);
     }
 
 }
