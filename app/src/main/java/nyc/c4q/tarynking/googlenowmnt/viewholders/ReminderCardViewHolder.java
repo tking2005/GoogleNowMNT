@@ -1,9 +1,11 @@
 package nyc.c4q.tarynking.googlenowmnt.viewholders;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +29,7 @@ public class ReminderCardViewHolder extends RecyclerView.ViewHolder{
     private EditText reminderEditText;
     private ReminderAdapter adapter;
     public static List<Reminder> myReminderList = new ArrayList<Reminder>();
+    SharedPreferences.Editor editor;
 
 
     public ReminderCardViewHolder(ViewGroup parent) {
@@ -38,6 +41,17 @@ public class ReminderCardViewHolder extends RecyclerView.ViewHolder{
         adapter = new ReminderAdapter(myReminderList);
         recyclerView.setAdapter(adapter);
 
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.requestFocus();
+                return true;
+            }
+        });
+
+
+
+
         reminderEditText = (EditText) mView.findViewById(R.id.reminder_edit_view);
         addButton = (Button) mView.findViewById(R.id.reminder_add_new);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +61,8 @@ public class ReminderCardViewHolder extends RecyclerView.ViewHolder{
                 //TODO: Code to add reminder to reminder adapter
                 if(reminderEditText.getText() != null){
                     Reminder reminder = new Reminder(String.valueOf(reminderEditText.getText()));
-                    myReminderList.add(reminder);
-                    adapter.updateList(myReminderList);
+                    adapter.updateList(reminder);
+                    adapter.notifyDataSetChanged();
                     Toast.makeText(view.getContext(), myReminderList.size()+"", Toast.LENGTH_SHORT).show();
                     ///recyclerView.getAdapter().notifyDataSetChanged();
 //                    PreferenceManager.getDefaultSharedPreferences(view.getContext()).edit().putStringSet("reminder", ).apply();

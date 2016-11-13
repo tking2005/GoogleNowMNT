@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,7 @@ import java.util.Set;
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderRecyclerViewHolder>{
 
 
-    public  List<Reminder> myReminderList = new ArrayList<Reminder>();
+    public  List<Reminder> myReminderList;
     private Set<String> myReminderSet = new HashSet<>();
 
     public ReminderAdapter(List<Reminder> data){
@@ -42,9 +41,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderRecyclerViewHo
         notifyDataSetChanged();
     }
 
-    public void updateList(List<Reminder> data) {
-        myReminderList = data;
-        notifyDataSetChanged();
+    public void updateList(Reminder data) {
+        myReminderList.add(data);
+        this.notifyDataSetChanged();
     }
 
     @Override

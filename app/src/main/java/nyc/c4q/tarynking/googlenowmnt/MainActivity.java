@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         permission();
 
         recyclerView = (RecyclerView) findViewById(R.id.rv);
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         addWeatherCard();
 
         //Do for reminder
-        Reminder reminder1 = new Reminder("do laundry");
+        Reminder reminder1 = new Reminder("");
         gnadapter.addToMyItemList(reminder1);
 
         //Nesada's currency card

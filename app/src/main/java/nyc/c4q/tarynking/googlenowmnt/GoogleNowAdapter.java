@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import nyc.c4q.tarynking.googlenowmnt.Cards.CurrencyHolder;
 import nyc.c4q.tarynking.googlenowmnt.models.weather.WeatherModel;
 import nyc.c4q.tarynking.googlenowmnt.reminderCard.Reminder;
 import nyc.c4q.tarynking.googlenowmnt.viewholders.ReminderCardViewHolder;
@@ -21,7 +22,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
     private List<Object> myItemList = new ArrayList<Object>();
 
     //1. Add Final Variables
-    private final int WEATHER = 0, REMINDER = 1;
+    private final int WEATHER = 0, REMINDER = 1, CURRENCY = 2;
 
 
 
@@ -40,7 +41,7 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
         //   Add another else if for your card,
         //   example: else if (dataList.(position) instanceof <name_of_your_POJO>)
         //            return <your_card_constant_in_the_field>
-        return -1;
+        return CURRENCY;
     }
 
     //4. MAke WeatherViewHolder and delete this
@@ -81,6 +82,10 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
                 System.out.println("Inflating viewHolder: reminder");
                 viewHolder = new ReminderCardViewHolder(parent);
                 break;
+            case CURRENCY:
+                System.out.println("Inflating viewHolder: reminder");
+                viewHolder = new CurrencyHolder(parent);
+                break;
             //3. Inflating your personalized view holder...
             //   Add a case for <your_card_constant>
             //   set viewHolder = new custom <your_view_holder_class> that you'll make
@@ -102,6 +107,10 @@ public class GoogleNowAdapter extends RecyclerView.Adapter{
             case REMINDER:
                 ReminderCardViewHolder reminderViewHolder = (ReminderCardViewHolder) holder;
                 reminderViewHolder.bind(myItemList.get(position));
+                break;
+            case CURRENCY:
+                CurrencyHolder currencyHolder = (CurrencyHolder) holder;
+                currencyHolder.bind(myItemList.get(position));
                 break;
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here
